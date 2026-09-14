@@ -24,9 +24,11 @@ into a mechanical check the moment it happened. The full list is in
   ATS-parseable, no ligature glyphs. The agent cannot mark work finished by
   saying so.
 - **Provenance over trust.** Every bullet in a built resume must trace to a
-  phrase that literally appears in the candidate's source files. The builder
-  refuses to compile otherwise. "Never invent a bullet" is a check, not a
-  rule to remember.
+  phrase that literally appears in the candidate's source files. In the
+  author's build the builder refuses to compile otherwise; this template
+  ships the rule and the PDF verifier, and the provenance check is the first
+  item on the porting list in [`docs/06_FEATURES.md`](docs/06_FEATURES.md).
+  "Never invent a bullet" is meant to be a check, not a rule to remember.
 - **Two scores, never blended.** `fit` measures how well the background
   matches the JD; `odds` measures the chance of clearing that employer's
   screen. A wide gap means "apply via referral", not "skip".
@@ -60,6 +62,34 @@ beats a good base resume. That experiment is still running.
 | Guardrails added after a real incident | 7 |
 
 ---
+
+## Features at a glance
+
+The full list, with a status for each (ships in this repo, operating rule,
+or documented from the author's build), is in
+[`docs/06_FEATURES.md`](docs/06_FEATURES.md). The short version:
+
+| Stage | What the system does |
+|---|---|
+| **Onboarding** | One interview turns your real resume into a bullet library, role headers, skills blocks and a profile with salary, notice period, target roles and locations. |
+| **Resume engine** | Locked one-page template, per-application specs that select and order real bullets, Chrome PDF compile with auto-fit, archived (never deleted) replacements, optional cover letter. |
+| **QA gate** | Pass/fail verifier: one page, ATS text layer, no dashes, no ligatures, no leaked template text, name first, bullet and word floors, required and banned facts, no unheld title claim, no unverified estimates, sent resumes frozen. |
+| **Scoring** | Six-dimension rubric with a re-derivable breakdown; fit and odds kept separate; skip / review / auto-approve thresholds; years of experience never scored; location a pre-filter, never a dimension. |
+| **Discovery** | Greenhouse, Lever and Ashby scraper with no API key; manual capture from a pasted JD or URL; recruiter email captured on the row. |
+| **Tracking** | SQLite tracker with a fixed status flow, append-only notes, applied-date stamps, and a clear split between "you passed" and "they passed". |
+| **Outreach** | Gmail drafts with the resume attached; the kit has no send path. Telegram digest of the review queue. No form autofill, ever. |
+| **Dashboard** | Supabase and Vercel approval dashboard for the phone: Review, To Apply, Pipeline; fit and odds side by side; two-way sync with the local tracker; a seeded demo instance. |
+| **Interview prep** | Company-researched prep report with every candidate fact tagged by confidence. |
+| **Operating rules** | Seven guardrails, each with the incident behind it, and a scheduled-run design (morning pipeline, evening audit) documented for reuse. |
+
+Beyond the shipped set, the author's build adds a validation gate on every
+status transition, JD-quality caps on fit, employer-tier odds adjustments,
+Gmail-alert discovery with queue caps and a 7-day no-JD clock, a location
+taxonomy module, ghost-job signals, an outcome tracker that reads employer
+replies, a scoreboard whose only North Star is interviews per ten
+applications, pending-action deadlines, a health check and per-run tracing.
+Each is described in the features doc with the order that worked for
+porting them.
 
 ## What you get
 
@@ -167,6 +197,7 @@ beats a good base resume. That experiment is still running.
 | `docs/03_PIPELINE_OVERVIEW.md` | The optional tracking pipeline | optional |
 | `docs/04_INTERVIEW_PREP_GUIDE.md` | The optional interview-prep report generator | optional |
 | `docs/05_DESIGN_DECISIONS.md` | The incidents behind each guardrail, and what was measured | reference |
+| `docs/06_FEATURES.md` | Every feature with its status: ships, rule, or described from the author's build | reference |
 | `demo/` | A seeded, fictional demo instance for screenshots and walkthroughs | reference |
 
 ---

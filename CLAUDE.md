@@ -123,6 +123,10 @@ scoring (`score.py`), a Telegram digest, Gmail drafts, and a Supabase +
 Vercel approval dashboard. None of it is required to tailor resumes. Set it
 up only if the user asks.
 
+`docs/06_FEATURES.md` lists every feature of the full system with its
+status (ships here, rule, or described from the author's build) and the
+order in which to port the described ones.
+
 ## Optional interview-prep reports
 
 When the user has an interview lined up, `docs/04_INTERVIEW_PREP_GUIDE.md`
